@@ -25,11 +25,11 @@ function main() {
 		});
 	} else {
 		for (var i in events) {
-			if (events[i].getStartTime() <= dateTime && events[i].getEndTime() >= dateTime) {
+			if (events[i].getEndTime() <= dateTime) continue; //既に終わっているものは無視
+			if (events[i].getStartTime() <= dateTime) { //開始時間が前のものを対象
 				status = identifyStatus(events[i]);
-				// break; //コメントアウトすると開始時間が一番遅い進行中イベントになる
-			} else {
-				// その時間にイベントがなければステータスの内容をクリア
+				console.log(status)
+			} else { // その時間にイベントがなければステータスの内容をクリア
 				status = JSON.stringify({
 					"profile": {
 						"status_text": "",
